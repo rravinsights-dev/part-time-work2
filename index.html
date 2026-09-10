@@ -103,7 +103,7 @@
       margin: 0 auto;
     }
 
-    /* Note Box (Yellow / Amber Theme) */
+    /* Note Box (Yellow Theme) */
     .note-box {
       background: #fef3c7;
       border-left: 4px solid #f59e0b;
@@ -362,15 +362,20 @@
       btn.disabled = true;
       btn.innerHTML = 'SUBMITTING... <i class="fa-solid fa-spinner fa-spin"></i>';
 
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => {
-          window.location.href = 'thankyou.html';
-        })
-        .catch(error => {
-          alert('Details submit karne me issue aaya, kripya firse try karein.');
-          btn.disabled = false;
-          btn.innerHTML = 'SUBMIT & GET DETAILS <i class="fa-solid fa-arrow-right"></i>';
-        });
+      // Cross-origin submission handler added for Google Apps Script
+      fetch(scriptURL, { 
+        method: 'POST', 
+        mode: 'no-cors',
+        body: new FormData(form)
+      })
+      .then(() => {
+        window.location.href = 'thankyou.html';
+      })
+      .catch(error => {
+        alert('Details submit karne me issue aaya, kripya firse try karein.');
+        btn.disabled = false;
+        btn.innerHTML = 'SUBMIT & GET DETAILS <i class="fa-solid fa-arrow-right"></i>';
+      });
     });
   </script>
 
