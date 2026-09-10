@@ -253,10 +253,23 @@
     }
 
     .btn-submit:disabled {
-      background: #94a3b8;
-      cursor: not-allowed;
-      box-shadow: none;
-      transform: none;
+      background: #94a3b8 !important;
+      cursor: not-allowed !important;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    .already-submitted-msg {
+      display: none;
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      color: #b91c1c;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 12px;
     }
 
     .footer-secure {
@@ -306,7 +319,7 @@
           <label>Aapka Full Name*</label>
           <div class="input-wrapper">
             <i class="fa-regular fa-user"></i>
-            <input type="text" name="name" placeholder="Apna pura naam likhein" required>
+            <input type="text" name="name" id="nameInput" placeholder="Apna pura naam likhein" required>
           </div>
         </div>
 
@@ -314,7 +327,7 @@
           <label>Active Calling Phone Number*</label>
           <div class="input-wrapper">
             <i class="fa-solid fa-phone"></i>
-            <input type="tel" name="phone" placeholder="10 digit calling number" pattern="[0-9]{10}" required>
+            <input type="tel" name="phone" id="phoneInput" placeholder="10 digit calling number" pattern="[0-9]{10}" required>
           </div>
         </div>
 
@@ -322,7 +335,7 @@
           <label>WhatsApp Number (Details ke liye)*</label>
           <div class="input-wrapper">
             <i class="fa-brands fa-whatsapp"></i>
-            <input type="tel" name="whatsapp" placeholder="10 digit WhatsApp number" pattern="[0-9]{10}" required>
+            <input type="tel" name="whatsapp" id="whatsappInput" placeholder="10 digit WhatsApp number" pattern="[0-9]{10}" required>
           </div>
         </div>
 
@@ -330,7 +343,7 @@
           <label>Aapki Umarr (Age Group)*</label>
           <div class="input-wrapper">
             <i class="fa-regular fa-calendar"></i>
-            <select name="age_group" required>
+            <select name="age_group" id="ageInput" required>
               <option value="" disabled selected>Select Age Group</option>
               <option value="18-22">18 - 22 Years</option>
               <option value="23-28">23 - 28 Years</option>
@@ -343,6 +356,10 @@
         <button type="submit" class="btn-submit" id="submitBtn">
           SUBMIT & GET DETAILS <i class="fa-solid fa-arrow-right"></i>
         </button>
+        
+        <div class="already-submitted-msg" id="alreadySubmittedMsg">
+          <i class="fa-solid fa-circle-info"></i> Aapne aaj pehle hi form submit kar diya hai!
+        </div>
       </form>
 
       <div class="footer-secure">
@@ -355,6 +372,38 @@
     const scriptURL = 'https://script.google.com/macros/s/AKfycby4FJDt-_ehOqyc1dxEkRBZCOWHt6-9RGkdQKI-UPxUfDoDD6jAFJ9NeudWsmrGrV_K/exec';
     const form = document.getElementById('leadForm');
     const btn = document.getElementById('submitBtn');
+    const alertMsg = document.getElementById('alreadySubmittedMsg');
+
+    // 24 Ghante (In Milliseconds)
+    const LOCK_TIME = 24 * 60 * 60 * 1000; 
+
+    // Check if user has submitted in last 24 hours
+    function checkSubmissionStatus() {
+      const lastSubmission = localStorage.getItem('form_submitted_timestamp');
+      if (lastSubmission) {
+        const timePassed = Date.now() - parseInt(lastSubmission);
+        if (timePassed < LOCK_TIME) {
+          disableForm();
+        } else {
+          localStorage.removeItem('form_submitted_timestamp');
+        }
+      }
+    }
+
+    function disableForm() {
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-check-double"></i> ALREADY SUBMITTED';
+      alertMsg.style.display = 'block';
+      
+      // Inputs ko read-only / disabled karna
+      document.getElementById('nameInput').disabled = true;
+      document.getElementById('phoneInput').disabled = true;
+      document.getElementById('whatsappInput').disabled = true;
+      document.getElementById('ageInput').disabled = true;
+    }
+
+    // Run check on page load
+    checkSubmissionStatus();
 
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -362,7 +411,9 @@
       btn.disabled = true;
       btn.innerHTML = 'SUBMITTING... <i class="fa-solid fa-spinner fa-spin"></i>';
 
-      // Cross-origin submission handler added for Google Apps Script
+      // Record Submission Time
+      localStorage.setItem('form_submitted_timestamp', Date.now().toString());
+
       fetch(scriptURL, { 
         method: 'POST', 
         mode: 'no-cors',
@@ -373,6 +424,7 @@
       })
       .catch(error => {
         alert('Details submit karne me issue aaya, kripya firse try karein.');
+        localStorage.removeItem('form_submitted_timestamp');
         btn.disabled = false;
         btn.innerHTML = 'SUBMIT & GET DETAILS <i class="fa-solid fa-arrow-right"></i>';
       });
