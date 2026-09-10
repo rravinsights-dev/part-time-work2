@@ -410,20 +410,19 @@
       // Save timestamp locally
       localStorage.setItem('form_submitted_timestamp', Date.now().toString());
 
-      // Send data via navigator.sendBeacon or non-blocking background fetch
       const formData = new FormData(form);
 
-      // Fire fetch request asynchronously without awaiting resolution
+      // Background submission
       fetch(scriptURL, { 
         method: 'POST', 
         mode: 'no-cors',
         body: formData
       }).catch(err => console.log('Background sync error:', err));
 
-      // Immediate redirect to thank you page
+      // Balanced smooth delay: 1.2 Seconds (1200ms)
       setTimeout(() => {
         window.location.href = 'thankyou.html';
-      }, 100);
+      }, 1200);
     });
   </script>
 
