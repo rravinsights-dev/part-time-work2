@@ -3,172 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thank You - Application Received</title>
+  <title>Thank You | Registration Successful</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <style>
-    :root {
-      --bg-color: #f1f5f9;
-      --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --accent-green: #10b981;
-      --accent-green-bg: #d1fae5;
-      --accent-blue: #2563eb;
-      --box-bg: #f8fafc;
-      --border-color: #e2e8f0;
-    }
 
+  <!-- Snap Pixel Code -->
+  <script type='text/javascript'>
+  (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
+  {a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
+  a.queue=[];var s='script';r=t.createElement(s);r.async=!0;
+  r.src=n;var u=t.getElementsByTagName(s)[0];
+  u.parentNode.insertBefore(r,u);})(window,document,
+  'https://sc-static.net/scevent.min.js');
+
+  snaptr('init', 'daef5fca-4bbb-4d1e-93d7-4eeecee2b7db', {});
+
+  snaptr('track', 'PAGE_VIEW');
+  </script>
+  <!-- End Snap Pixel Code -->
+
+  <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
+      background-color: #f1f5f9;
+      color: #0f172a;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      padding: 20px 10px;
     }
 
-    .thankyou-card {
-      max-width: 480px;
+    .card {
+      max-width: 440px;
       width: 100%;
-      background: var(--card-bg);
+      background: #ffffff;
       border-radius: 20px;
-      padding: 40px 24px 32px 24px;
+      padding: 32px 24px;
       text-align: center;
-      box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.08), 0 0 15px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.08);
       border: 1px solid rgba(226, 232, 240, 0.8);
     }
 
-    /* Success Circle Icon */
     .icon-box {
-      width: 72px;
-      height: 72px;
-      background-color: var(--accent-green-bg);
+      width: 70px;
+      height: 70px;
+      background: #dcfce7;
+      color: #16a34a;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 24px auto;
-      animation: pulse 2s infinite;
-    }
-
-    .icon-box i {
       font-size: 32px;
-      color: var(--accent-green);
+      margin: 0 auto 20px;
     }
 
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
-      }
-      70% {
-        box-shadow: 0 0 0 15px rgba(16, 185, 129, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-      }
-    }
-
-    .thankyou-card h1 {
+    h1 {
       font-size: 22px;
       font-weight: 800;
-      color: var(--text-main);
-      margin-bottom: 12px;
-      line-height: 1.3;
-    }
-
-    .thankyou-card p.description {
-      font-size: 13.5px;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 28px;
-    }
-
-    /* Info Highlight Box */
-    .info-box {
-      background-color: var(--box-bg);
-      border-left: 4px solid var(--accent-blue);
-      border-radius: 10px;
-      padding: 16px 18px;
-      text-align: left;
+      color: #0f172a;
       margin-bottom: 10px;
     }
 
-    .info-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 12.5px;
-      color: #334155;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .info-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .info-item i {
-      color: var(--accent-blue);
+    p {
       font-size: 14px;
-      width: 16px;
-      text-align: center;
+      color: #64748b;
+      line-height: 1.5;
+      margin-bottom: 24px;
     }
 
-    /* Footer Text */
-    .copyright {
-      margin-top: 24px;
-      font-size: 11.5px;
-      color: var(--text-muted);
-      text-align: center;
+    .notice {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
 
-  <div class="thankyou-card">
-    <!-- Success Icon -->
+  <div class="card">
     <div class="icon-box">
       <i class="fa-solid fa-check"></i>
     </div>
-
-    <!-- Main Heading -->
-    <h1>Application Received Successfully!</h1>
+    <h1>Details Submitted Successfully!</h1>
+    <p>Aapki details receiving queue me add ho gayi hain. Humari team jaldi hi aapko WhatsApp aur Call ke zariye contact karegi.</p>
     
-    <!-- Subtitle -->
-    <p class="description">
-      Aapki details hamare paas submit ho gayi hain. Hamari team aapse jald hi Call ya WhatsApp ke zariye contact karke aage ki details share karegi.
-    </p>
-
-    <!-- Highlighted List Box -->
-    <div class="info-box">
-      <div class="info-item">
-        <i class="fa-solid fa-phone-volume"></i>
-        <span>Expect a response within 24 hours</span>
-      </div>
-      <div class="info-item">
-        <i class="fa-solid fa-square-check"></i>
-        <span>Step-by-step guidance & details share honge</span>
-      </div>
-      <div class="info-item">
-        <i class="fa-solid fa-shield-halved"></i>
-        <span>100% Privacy & Data Security Guaranteed</span>
-      </div>
+    <div class="notice">
+      <i class="fa-brands fa-whatsapp"></i> Kripya apna WhatsApp active rakhein.
     </div>
-  </div>
-
-  <!-- Copyright -->
-  <div class="copyright">
-    © 2026 Remote Work Guidance Portal. All Rights Reserved.
   </div>
 
 </body>
